@@ -51,5 +51,12 @@ namespace Tests
 
             Assert.Equal("Valocity", birthingUnit.GetMarried(person, "test"));
         }
+        [Fact]
+        public void GetMarried_FullNameLength_PassingTest()
+        {
+            Person person = new Person("Valocity");
+
+            Assert.Equal("Valocity Assessment", birthingUnit.GetMarried(person, "Assessment"));
+        }
     }
 }
