@@ -32,5 +32,17 @@ namespace Tests
 
             Assert.Single(birthUnitOneOlderPerson.GetBobs(true).ToList());
         }
+        [Fact]
+        public void GetBobs_HasNotBobAgeUnder30_PassingTest()
+        {
+            List<Person> people = new List<Person>
+            {
+                new Person("Bob"),
+                new Person("Bob")
+            };
+            BirthingUnit birthUnitWitoutOlderPerson = new BirthingUnit(people);
+
+            Assert.Equal(2, birthUnitWitoutOlderPerson.GetBobs(false).ToList().Count);
+        }
     }
 }
