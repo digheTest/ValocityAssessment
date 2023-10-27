@@ -70,17 +70,20 @@ namespace CodingAssessment.Refactor
 
             return _people.Where(p => p.Name == "Bob" && (p.DateOfBirth >= thirtyYearsAgo || !olderThan30));
         }
-
-        public string GetMarried(Person p, string lastName)
+        /// <summary>
+        /// This function receives Person object and last name of the person returns full name.
+        /// If whole string of full name is greater than 255 characters than it will returns only 255 characters.
+        /// </summary>
+        /// <param name="person">Person</param>
+        /// <param name="lastName">string</param>
+        /// <returns>string</returns>
+        public string GetMarried(Person person, string lastName)
         {
             if (lastName.Contains("test"))
-                return p.Name;
-            if ((p.Name.Length + lastName).Length > 255)
-            {
-                (p.Name + " " + lastName).Substring(0, 255);
-            }
+                return person.Name;
 
-            return p.Name + " " + lastName;
+            string fullName = person.Name + " " + lastName;
+            return fullName.Length > 255 ? fullName.Substring(0, 255) : fullName;
         }
     }
 }
