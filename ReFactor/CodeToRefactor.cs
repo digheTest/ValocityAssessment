@@ -41,9 +41,9 @@ namespace CodingAssessment.Refactor
         }
 
         /// <summary>
-        /// This method receives values in integer and create Person based upon it
+        /// This function receives values in integer and create Person based upon it
         /// </summary>
-        /// <param name="count"></param>
+        /// <param name="count">interger</param>
         /// <returns>List<Person></returns>
         public List<Person> GetPeople(int count)
         {
@@ -59,7 +59,11 @@ namespace CodingAssessment.Refactor
 
             return _people;
         }
-
+        /// <summary>
+        /// This function receives boolean and returns number of Person are above 30 years if boolean is true.
+        /// </summary>
+        /// <param name="olderThan30">boolean</param>
+        /// <returns>IEnumerable<Person></returns>
         internal IEnumerable<Person> GetBobs(bool olderThan30)
         {
             DateTime thirtyYearsAgo = DateTime.Now.AddYears(-30);
