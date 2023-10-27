@@ -23,10 +23,9 @@ namespace CodingAssessment.Refactor
 
     public class BirthingUnit
     {
-        /// <summary>
-        /// MaxItemsToRetrieve
-        /// </summary>
+
         private List<Person> _people;
+        private static readonly List<string> names = new List<string> { "Bob", "Betty" };
 
         public BirthingUnit()
         {
@@ -34,34 +33,22 @@ namespace CodingAssessment.Refactor
         }
 
         /// <summary>
-        /// GetPeoples
+        /// This method receives values in integer and create Person based upon it
         /// </summary>
-        /// <param name="j"></param>
-        /// <returns>List<object></returns>
-        public List<Person> GetPeople(int i)
+        /// <param name="count"></param>
+        /// <returns>List<Person></returns>
+        public List<Person> GetPeople(int count)
         {
-            for (int j = 0; j < i; j++)
+            var random = new Random();
+
+            for (int i = 0; i < count; i++)
             {
-                try
-                {
-                    // Creates a dandon Name
-                    string name = string.Empty;
-                    var random = new Random();
-                    if (random.Next(0, 1) == 0) {
-                        name = "Bob";
-                    }
-                    else {
-                        name = "Betty";
-                    }
-                    // Adds new people to the list
-                    _people.Add(new Person(name, DateTime.UtcNow.Subtract(new TimeSpan(random.Next(18, 85) * 356, 0, 0, 0))));
-                }
-                catch (Exception e)
-                {
-                    // Dont think this should ever happen
-                    throw new Exception("Something failed in user creation");
-                }
+                string name = names[random.Next(0, 2)];
+                DateTime dob = DateTime.Now.AddYears(DateTime.UtcNow.Subtract(new TimeSpan(random.Next(18, 85) * 356, 0, 0, 0)).Year);
+
+                _people.Add(new Person(name, dob));
             }
+
             return _people;
         }
 

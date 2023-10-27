@@ -15,5 +15,10 @@ namespace Tests
         {
             Assert.Equal(5, birthingUnit.GetPeople(5).Count());
         }
+        [Fact]
+        public void GetPeople_NotSameInputOutput_FaillingTest()
+        {
+            Assert.NotEqual(4, birthingUnit.GetPeople(5).Count());
+        }
     }
 }
