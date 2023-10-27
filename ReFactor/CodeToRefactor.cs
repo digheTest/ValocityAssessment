@@ -4,20 +4,20 @@ using System.Linq;
 
 namespace CodingAssessment.Refactor
 {
-    public class People
+    public class Person
     {
         private static readonly DateTimeOffset Under16 = DateTimeOffset.UtcNow.AddYears(-15);
         public string Name { get; private set; }
-        public DateTimeOffset DOB { get; private set; }
+        public DateTimeOffset DateOfBirth { get; private set; }
 
-        public People(string name) : this(name, Under16.Date)
+        public Person(string name) : this(name, Under16.Date)
         {
         }
 
-        public People(string name, DateTime dob)
+        public Person(string name, DateTime dob)
         {
             Name = name;
-            DOB = dob;
+            DateOfBirth = dob;
         }
     }
 
@@ -26,11 +26,11 @@ namespace CodingAssessment.Refactor
         /// <summary>
         /// MaxItemsToRetrieve
         /// </summary>
-        private List<People> _people;
+        private List<Person> _people;
 
         public BirthingUnit()
         {
-            _people = new List<People>();
+            _people = new List<Person>();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace CodingAssessment.Refactor
         /// </summary>
         /// <param name="j"></param>
         /// <returns>List<object></returns>
-        public List<People> GetPeople(int i)
+        public List<Person> GetPeople(int i)
         {
             for (int j = 0; j < i; j++)
             {
@@ -54,7 +54,7 @@ namespace CodingAssessment.Refactor
                         name = "Betty";
                     }
                     // Adds new people to the list
-                    _people.Add(new People(name, DateTime.UtcNow.Subtract(new TimeSpan(random.Next(18, 85) * 356, 0, 0, 0))));
+                    _people.Add(new Person(name, DateTime.UtcNow.Subtract(new TimeSpan(random.Next(18, 85) * 356, 0, 0, 0))));
                 }
                 catch (Exception e)
                 {
@@ -65,12 +65,12 @@ namespace CodingAssessment.Refactor
             return _people;
         }
 
-        private IEnumerable<People> GetBobs(bool olderThan30)
+        private IEnumerable<Person> GetBobs(bool olderThan30)
         {
-            return olderThan30 ? _people.Where(x => x.Name == "Bob" && x.DOB >= DateTime.Now.Subtract(new TimeSpan(30 * 356, 0, 0, 0))) : _people.Where(x => x.Name == "Bob");
+            return olderThan30 ? _people.Where(x => x.Name == "Bob" && x.DateOfBirth >= DateTime.Now.Subtract(new TimeSpan(30 * 356, 0, 0, 0))) : _people.Where(x => x.Name == "Bob");
         }
 
-        public string GetMarried(People p, string lastName)
+        public string GetMarried(Person p, string lastName)
         {
             if (lastName.Contains("test"))
                 return p.Name;
