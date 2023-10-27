@@ -44,5 +44,12 @@ namespace Tests
 
             Assert.Equal(2, birthUnitWitoutOlderPerson.GetBobs(false).ToList().Count);
         }
+        [Fact]
+        public void GetMarried_IfConditionCheck_PassingTest()
+        {
+            Person person = new Person("Valocity");
+
+            Assert.Equal("Valocity", birthingUnit.GetMarried(person, "test"));
+        }
     }
 }
