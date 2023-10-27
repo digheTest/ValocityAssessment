@@ -58,5 +58,23 @@ namespace Tests
 
             Assert.Equal("Valocity Assessment", birthingUnit.GetMarried(person, "Assessment"));
         }
+        [Fact]
+        public void GetMarried_FullNameMoreThan255_PassingTest()
+        {
+            string stringWithMoreThan255Char = "worirbpwoirfoivdjafoajdfoqu2-3i\t" +
+                "[kd;ek;alskdp[isdkf;aeoiqoihioojqosjdfoshfkahsdlkfalkndslknxcoajsvwaevakwel;wajvpdojlcmz;" +
+                "xlcmasdmoam;lefpoefpaeiohguohjavbvknaweoihaivoasdvlkajdlkvaoiefhphlkndslknvfaoirfawieajlkasdnv" +
+                "laksjpoewajpoajepalsdmaooesjfpoaewjewofja;";
+
+            string comparingString = "Valocity worirbpwoirfoivdjafoajdfoqu2-3i	[kd;ek;alskdp[isdkf;aeoiqoihioojqos" +
+                "jdfoshfkahsdlkfalkndslknxcoajsvwaevakwel;wajvpdojlcmz;xlcmasdmoam;lefpoefpaeiohguohjavbvknaweoihai" +
+                "voasdvlkajdlkvaoiefhphlkndslknvfaoirfawieajlkasdnvlaksjpoewajpoajepalsdmaooesjfpo";
+
+            Person person = new Person("Valocity");
+
+            string test = birthingUnit.GetMarried(person, stringWithMoreThan255Char);
+
+            Assert.Equal(comparingString, birthingUnit.GetMarried(person, stringWithMoreThan255Char));
+        }
     }
 }
