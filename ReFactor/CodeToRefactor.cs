@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Tests")]
 
 namespace CodingAssessment.Refactor
 {
@@ -32,6 +35,11 @@ namespace CodingAssessment.Refactor
             _people = new List<Person>();
         }
 
+        public BirthingUnit(List<Person> people)
+        {
+            _people = people;
+        }
+
         /// <summary>
         /// This method receives values in integer and create Person based upon it
         /// </summary>
@@ -52,9 +60,11 @@ namespace CodingAssessment.Refactor
             return _people;
         }
 
-        private IEnumerable<Person> GetBobs(bool olderThan30)
+        internal IEnumerable<Person> GetBobs(bool olderThan30)
         {
-            return olderThan30 ? _people.Where(x => x.Name == "Bob" && x.DateOfBirth >= DateTime.Now.Subtract(new TimeSpan(30 * 356, 0, 0, 0))) : _people.Where(x => x.Name == "Bob");
+            DateTime thirtyYearsAgo = DateTime.Now.AddYears(-30);
+
+            return _people.Where(p => p.Name == "Bob" && (p.DateOfBirth >= thirtyYearsAgo || !olderThan30));
         }
 
         public string GetMarried(Person p, string lastName)
